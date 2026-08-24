@@ -1,4 +1,4 @@
-import vigor from 'vigor-fetch'
+import { vigor } from 'vigor-fetch'
 
 import { RobloxPlaceId, RobloxJobId } from '@/types/branded'
 import { RobloxServerLocation, RobloxIpGeoRaw, RobloxIpGeoRawSchema } from '@/types/responses'

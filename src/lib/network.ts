@@ -1,4 +1,4 @@
-import vigor from 'vigor-fetch'
+import { vigor } from 'vigor-fetch'
 import { RobloxCookie } from '@/types/branded'
 import { CsrfTokenManager } from './csrf'
 import { makeHeaderMiddlewares } from './middlewares'

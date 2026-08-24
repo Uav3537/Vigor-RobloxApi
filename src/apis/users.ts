@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import vigor from 'vigor-fetch'
+import { vigor } from 'vigor-fetch'
 
 import { RobloxCookie, RobloxUserId } from '@/types/branded'
 import {

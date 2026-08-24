@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import vigor from 'vigor-fetch'
+import { vigor } from 'vigor-fetch'
 
 import { RobloxPlaceId, RobloxAssetId } from '@/types/branded'
 import {

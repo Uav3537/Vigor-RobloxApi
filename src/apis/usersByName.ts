@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import vigor from 'vigor-fetch'
+import { vigor } from 'vigor-fetch'
 
 import { RobloxUserSimple, RobloxUserSimpleSchema } from '@/types/responses'
 

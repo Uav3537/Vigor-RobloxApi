@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import vigor, { VigorFetchError } from 'vigor-fetch'
+import { vigor, VigorFetchError } from 'vigor-fetch'
 import { RobloxCookie } from '@/types/branded'
 import { CsrfTokenManager } from './csrf'
 
