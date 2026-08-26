@@ -26,11 +26,11 @@ export interface RobloxTtlConfig {
 export type ResolvedTtlConfig = Required<RobloxTtlConfig>
 
 export const DEFAULT_TTL_CONFIG: ResolvedTtlConfig = {
-    usersSimple:           30 * 60 * 1000,
+    usersSimple:           24 * 60 * 60 * 1000,
     users:                 60 * 60 * 1000,
     usernames:             30 * 60 * 1000,
-    thumbnailAssets:        6 * 60 * 60 * 1000,
-    thumbnails:             6 * 60 * 60 * 1000,
+    thumbnailAssets:        48 * 60 * 60 * 1000,
+    thumbnails:             48 * 60 * 60 * 1000,
     serversSimple:          5 * 1000,
     friends:               10 * 60 * 1000,
     placeInfo:             60 * 60 * 1000,
