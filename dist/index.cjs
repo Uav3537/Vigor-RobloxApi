@@ -359,20 +359,27 @@ var RobloxUserCountryCodeSchema = import_zod2.z.object({
 var RobloxUserRolesSchema = import_zod2.z.object({
   roles: import_zod2.z.array(import_zod2.z.string())
 });
-var RobloxThumbnailTargetSchema = import_zod2.z.object({
-  targetId: import_zod2.z.union([RobloxAssetIdSchema, RobloxUserIdSchema]).optional(),
+var RobloxThumbnailTargetBaseSchema = import_zod2.z.object({
+  targetId: import_zod2.z.preprocess(
+    (v) => v === 0 ? void 0 : v,
+    import_zod2.z.union([RobloxAssetIdSchema, RobloxUserIdSchema]).optional()
+  ),
   token: import_zod2.z.string().optional(),
   type: import_zod2.z.string().optional(),
   size: import_zod2.z.string().optional(),
   format: import_zod2.z.string().optional(),
   isCircular: import_zod2.z.boolean().optional()
 });
-var RobloxThumbnailRawSchema = RobloxThumbnailTargetSchema.extend({
+var RobloxThumbnailTargetSchema = RobloxThumbnailTargetBaseSchema.refine(
+  (v) => v.targetId != null !== (v.token != null),
+  { message: "Exactly one of targetId or token must be provided" }
+);
+var RobloxThumbnailRawSchema = RobloxThumbnailTargetBaseSchema.extend({
   imageUrl: import_zod2.z.string().nullable(),
   state: import_zod2.z.string(),
   version: import_zod2.z.string()
 });
-var RobloxThumbnailSchema = RobloxThumbnailTargetSchema.extend({
+var RobloxThumbnailSchema = RobloxThumbnailTargetBaseSchema.extend({
   url: import_zod2.z.string().nullable(),
   state: import_zod2.z.string(),
   version: import_zod2.z.string()

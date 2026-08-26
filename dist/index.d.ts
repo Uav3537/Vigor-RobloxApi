@@ -73,7 +73,7 @@ type RobloxUserCountryCode = z.infer<typeof RobloxUserCountryCodeSchema>;
 type RobloxUserRoles = z.infer<typeof RobloxUserRolesSchema>;
 type RobloxAuthenticatedUser = RobloxUserSimple & Partial<RobloxUserDescription> & Partial<RobloxUserBirthdate> & Partial<RobloxUserGender> & Partial<RobloxUserAgeBracket> & Partial<RobloxUserCountryCode> & Partial<RobloxUserRoles>;
 declare const RobloxThumbnailTargetSchema: z.ZodObject<{
-    targetId: z.ZodOptional<z.ZodUnion<readonly [z.core.$ZodBranded<z.ZodNumber, "RobloxApi::Roblox_AssetId", "out">, z.core.$ZodBranded<z.ZodNumber, "RobloxApi::Roblox_UserId", "out">]>>;
+    targetId: z.ZodPreprocess<z.ZodOptional<z.ZodUnion<readonly [z.core.$ZodBranded<z.ZodNumber, "RobloxApi::Roblox_AssetId", "out">, z.core.$ZodBranded<z.ZodNumber, "RobloxApi::Roblox_UserId", "out">]>>>;
     token: z.ZodOptional<z.ZodString>;
     type: z.ZodOptional<z.ZodString>;
     size: z.ZodOptional<z.ZodString>;
@@ -81,7 +81,7 @@ declare const RobloxThumbnailTargetSchema: z.ZodObject<{
     isCircular: z.ZodOptional<z.ZodBoolean>;
 }, z.core.$strip>;
 declare const RobloxThumbnailRawSchema: z.ZodObject<{
-    targetId: z.ZodOptional<z.ZodUnion<readonly [z.core.$ZodBranded<z.ZodNumber, "RobloxApi::Roblox_AssetId", "out">, z.core.$ZodBranded<z.ZodNumber, "RobloxApi::Roblox_UserId", "out">]>>;
+    targetId: z.ZodPreprocess<z.ZodOptional<z.ZodUnion<readonly [z.core.$ZodBranded<z.ZodNumber, "RobloxApi::Roblox_AssetId", "out">, z.core.$ZodBranded<z.ZodNumber, "RobloxApi::Roblox_UserId", "out">]>>>;
     token: z.ZodOptional<z.ZodString>;
     type: z.ZodOptional<z.ZodString>;
     size: z.ZodOptional<z.ZodString>;
@@ -92,7 +92,7 @@ declare const RobloxThumbnailRawSchema: z.ZodObject<{
     version: z.ZodString;
 }, z.core.$strip>;
 declare const RobloxThumbnailSchema: z.ZodObject<{
-    targetId: z.ZodOptional<z.ZodUnion<readonly [z.core.$ZodBranded<z.ZodNumber, "RobloxApi::Roblox_AssetId", "out">, z.core.$ZodBranded<z.ZodNumber, "RobloxApi::Roblox_UserId", "out">]>>;
+    targetId: z.ZodPreprocess<z.ZodOptional<z.ZodUnion<readonly [z.core.$ZodBranded<z.ZodNumber, "RobloxApi::Roblox_AssetId", "out">, z.core.$ZodBranded<z.ZodNumber, "RobloxApi::Roblox_UserId", "out">]>>>;
     token: z.ZodOptional<z.ZodString>;
     type: z.ZodOptional<z.ZodString>;
     size: z.ZodOptional<z.ZodString>;
@@ -259,7 +259,7 @@ declare const RobloxIpGeoRawSchema: z.ZodObject<{
 }, z.core.$loose>;
 type RobloxIpGeoRaw = z.infer<typeof RobloxIpGeoRawSchema>;
 declare const RobloxThumbnailRawWithRequestIdSchema: z.ZodObject<{
-    targetId: z.ZodOptional<z.ZodUnion<readonly [z.core.$ZodBranded<z.ZodNumber, "RobloxApi::Roblox_AssetId", "out">, z.core.$ZodBranded<z.ZodNumber, "RobloxApi::Roblox_UserId", "out">]>>;
+    targetId: z.ZodPreprocess<z.ZodOptional<z.ZodUnion<readonly [z.core.$ZodBranded<z.ZodNumber, "RobloxApi::Roblox_AssetId", "out">, z.core.$ZodBranded<z.ZodNumber, "RobloxApi::Roblox_UserId", "out">]>>>;
     token: z.ZodOptional<z.ZodString>;
     type: z.ZodOptional<z.ZodString>;
     size: z.ZodOptional<z.ZodString>;

@@ -288,20 +288,27 @@ var RobloxUserCountryCodeSchema = z2.object({
 var RobloxUserRolesSchema = z2.object({
   roles: z2.array(z2.string())
 });
-var RobloxThumbnailTargetSchema = z2.object({
-  targetId: z2.union([RobloxAssetIdSchema, RobloxUserIdSchema]).optional(),
+var RobloxThumbnailTargetBaseSchema = z2.object({
+  targetId: z2.preprocess(
+    (v) => v === 0 ? void 0 : v,
+    z2.union([RobloxAssetIdSchema, RobloxUserIdSchema]).optional()
+  ),
   token: z2.string().optional(),
   type: z2.string().optional(),
   size: z2.string().optional(),
   format: z2.string().optional(),
   isCircular: z2.boolean().optional()
 });
-var RobloxThumbnailRawSchema = RobloxThumbnailTargetSchema.extend({
+var RobloxThumbnailTargetSchema = RobloxThumbnailTargetBaseSchema.refine(
+  (v) => v.targetId != null !== (v.token != null),
+  { message: "Exactly one of targetId or token must be provided" }
+);
+var RobloxThumbnailRawSchema = RobloxThumbnailTargetBaseSchema.extend({
   imageUrl: z2.string().nullable(),
   state: z2.string(),
   version: z2.string()
 });
-var RobloxThumbnailSchema = RobloxThumbnailTargetSchema.extend({
+var RobloxThumbnailSchema = RobloxThumbnailTargetBaseSchema.extend({
   url: z2.string().nullable(),
   state: z2.string(),
   version: z2.string()

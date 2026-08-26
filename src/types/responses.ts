@@ -78,8 +78,11 @@ export type RobloxAuthenticatedUser =
 
 // ── Thumbnail ────────────────────────────────────────────
 
-export const RobloxThumbnailTargetSchema = z.object({
-    targetId:   z.union([RobloxAssetIdSchema, RobloxUserIdSchema]).optional(),
+const RobloxThumbnailTargetBaseSchema = z.object({
+    targetId: z.preprocess(
+        (v) => (v === 0 ? undefined : v),
+        z.union([RobloxAssetIdSchema, RobloxUserIdSchema]).optional()
+    ),
     token:      z.string().optional(),
     type:       z.string().optional(),
     size:       z.string().optional(),
@@ -87,13 +90,18 @@ export const RobloxThumbnailTargetSchema = z.object({
     isCircular: z.boolean().optional(),
 })
 
-export const RobloxThumbnailRawSchema = RobloxThumbnailTargetSchema.extend({
+export const RobloxThumbnailTargetSchema = RobloxThumbnailTargetBaseSchema.refine(
+    (v) => (v.targetId != null) !== (v.token != null),
+    { message: 'Exactly one of targetId or token must be provided' }
+)
+
+export const RobloxThumbnailRawSchema = RobloxThumbnailTargetBaseSchema.extend({
     imageUrl: z.string().nullable(),
     state:    z.string(),
     version:  z.string(),
 })
 
-export const RobloxThumbnailSchema = RobloxThumbnailTargetSchema.extend({
+export const RobloxThumbnailSchema = RobloxThumbnailTargetBaseSchema.extend({
     url:     z.string().nullable(),
     state:   z.string(),
     version: z.string(),
@@ -206,10 +214,6 @@ export type RobloxFriendEntry = z.infer<typeof RobloxFriendEntrySchema>
 
 
 // ── Raw API response shapes ──────────────────────────────────
-// apis/ 내부 구현에서 쓰이는 로우 응답 shape들. 모두 zod 스키마로 정의해
-// 요청 경계(lib/middlewares.ts의 validate/pickKeyValidated)에서 실제로
-// 파싱·검증한 뒤 apis/ 로 넘긴다. 다른 패키지에서도 재사용할 수 있도록
-// 여기서 함께 export 한다.
 
 export const RobloxServerRawSchema = z.object({
     id:           RobloxJobIdSchema,
