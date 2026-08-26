@@ -78,7 +78,7 @@ export type RobloxAuthenticatedUser =
 
 // ── Thumbnail ────────────────────────────────────────────
 
-const RobloxThumbnailTargetBaseSchema = z.object({
+export const RobloxThumbnailTargetBaseSchema = z.object({
     targetId: z.preprocess(
         (v) => (v === 0 ? undefined : v),
         z.union([RobloxAssetIdSchema, RobloxUserIdSchema]).optional()
@@ -107,9 +107,10 @@ export const RobloxThumbnailSchema = RobloxThumbnailTargetBaseSchema.extend({
     version: z.string(),
 })
 
-export type RobloxThumbnailTarget = z.infer<typeof RobloxThumbnailTargetSchema>
-export type RobloxThumbnailRaw    = z.infer<typeof RobloxThumbnailRawSchema>
-export type RobloxThumbnail       = z.infer<typeof RobloxThumbnailSchema>
+export type RobloxThumbnailTargetBase = z.infer<typeof RobloxThumbnailTargetBaseSchema>
+export type RobloxThumbnailTarget     = z.infer<typeof RobloxThumbnailTargetSchema>
+export type RobloxThumbnailRaw        = z.infer<typeof RobloxThumbnailRawSchema>
+export type RobloxThumbnail           = z.infer<typeof RobloxThumbnailSchema>
 
 
 // ── Server ───────────────────────────────────────────────
